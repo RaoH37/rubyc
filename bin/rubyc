@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+lib = File.expand_path('lib')
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
+
+require 'rubyc'
+require 'optionparser'
+
+options = {
+  byte_file_path: nil,
+  file_or_dir_path: nil,
+  file_or_dir_output_path: nil
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename($PROGRAM_NAME)} v#{Rubyc.version} [options]"
+
+  opts.on('--load PATH', String, 'byte file to load') do |byte_file_path|
+    options[:byte_file_path] = byte_file_path
+  end
+
+  opts.on('--generate PATH', String, 'file or directory to compile') do |file_or_dir_path|
+    options[:file_or_dir_path] = file_or_dir_path
+  end
+
+  opts.on('--output PATH', String, 'file or directory to record compiled file') do |file_or_dir_output_path|
+    options[:file_or_dir_output_path] = file_or_dir_output_path
+  end
+end
+parser.parse!
+
+exit 1 if options.values.compact.empty?
+
+begin
+  if options[:byte_file_path]
+    Rubyc.load(options[:byte_file_path])
+  elsif options[:file_or_dir_path]
+    puts Rubyc.generate(options[:file_or_dir_path], output: options[:file_or_dir_output_path])
+  end
+rescue StandardError => e
+  puts e.message
+  puts e.backtrace.join("\n")
+  exit(2)
+end
