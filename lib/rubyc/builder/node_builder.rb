@@ -51,12 +51,10 @@ module Rubyc
         end
 
         def relative_path
-          @relative_path ||= @path.sub(@builder.abs_path, '')[1..]
+          @relative_path ||= @path.sub(@builder.abs_path, '').tap do |str|
+            str[0] = '' if str[0] == '/'
+          end
         end
-
-        # def relative_dir_path
-        #   @relative_dir_path ||= File.dirname(relative_path)
-        # end
 
         def <=>(other)
           @path <=> other.path
