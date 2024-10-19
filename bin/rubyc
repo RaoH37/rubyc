@@ -10,7 +10,7 @@ require 'optionparser'
 options = {
   byte_file_path: nil,
   file_or_dir_path: nil,
-  file_or_dir_output_path: nil
+  record_dir_path: nil
 }
 
 parser = OptionParser.new do |opts|
@@ -24,8 +24,8 @@ parser = OptionParser.new do |opts|
     options[:file_or_dir_path] = file_or_dir_path
   end
 
-  opts.on('--output PATH', String, 'file or directory to record compiled file') do |file_or_dir_output_path|
-    options[:file_or_dir_output_path] = file_or_dir_output_path
+  opts.on('--record-path PATH', String, 'directory to record compiled file') do |file_or_dir_output_path|
+    options[:record_dir_path] = file_or_dir_output_path
   end
 end
 parser.parse!
@@ -36,7 +36,7 @@ begin
   if options[:byte_file_path]
     Rubyc.load(options[:byte_file_path])
   elsif options[:file_or_dir_path]
-    puts Rubyc.generate(options[:file_or_dir_path], output: options[:file_or_dir_output_path])
+    puts Rubyc.generate(options[:file_or_dir_path], record_dir_path: options[:record_dir_path])
   end
 rescue StandardError => e
   puts e.message

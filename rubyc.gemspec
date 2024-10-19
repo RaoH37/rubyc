@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ['maxime.desecot@gmail.com']
 
   spec.summary = 'Tool to generate or load ruby bytecode'
-  spec.homepage = "https://github.com/RaoH37/rubyc"
+  spec.homepage = 'https://github.com/RaoH37/rubyc'
   spec.required_ruby_version = '>= 3.0.0'
 
   spec.metadata['homepage_uri'] = spec.homepage
@@ -27,10 +27,4 @@ Gem::Specification.new do |spec|
   spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
-
-  # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
-
-  # For more information and examples about making a new gem, check out our
-  # guide at: https://bundler.io/guides/creating_gem.html
 end

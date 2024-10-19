@@ -5,57 +5,37 @@ require 'fileutils'
 module Rubyc
   class Builder
     class NameBuilder
-      EXTENSION = '.rbc'
-
       class << self
-        def call(input_path, output)
-          new(input_path, output).generate
+        def call(package_name, record_dir_path)
+          new(package_name, record_dir_path).generate
         end
       end
 
-      def initialize(input_path, output)
-        @input_path = input_path
-        @output = output
-        @binary_dir_path = Dir.pwd
-        @binary_name = File.basename(@input_path, File.extname(@input_path))
+      def initialize(package_name, record_dir_path)
+        @package_name = package_name
+        @record_dir_path = record_dir_path
       end
 
       def generate
-        build unless @output.nil?
-        File.join(@binary_dir_path, binary_extend_name)
+        dist_path.tap do |path|
+          FileUtils.rm_rf path if File.exist? path
+          FileUtils.mkdir_p path
+        end
       end
 
       private
 
-      def binary_extend_name
-        "#{@binary_name}_#{RUBY_VERSION}_#{Rubyc.version}#{EXTENSION}"
+      def dist_path
+        File.join((@record_dir_path || Dir.pwd), 'dist', package_full_name)
       end
 
-      def build
-        expanded_output = File.expand_path(@output)
+      def package_full_name
+        "#{@package_name}_#{suffix}"
+      end
 
-        if File.directory?(expanded_output)
-          @binary_dir_path = expanded_output
-          return
-        end
-
-        last_path_node = File.basename(expanded_output, File.extname(expanded_output))
-
-        if File.file?(expanded_output)
-          File.unlik(expanded_output)
-          @binary_dir_path = File.expand_path(File.dirname(expanded_output))
-          @binary_name = last_path_node
-          return
-        end
-
-        if last_path_node == File.basename(expanded_output)
-          @binary_dir_path = File.expand_path(File.join(File.dirname(@output), last_path_node))
-        else
-          @binary_dir_path = File.expand_path(File.dirname(@output))
-          @binary_name = last_path_node
-        end
-
-        FileUtils.mkdir_p @binary_dir_path
+      def suffix
+        delimiter = '.'
+        "#{RUBY_VERSION.split(delimiter)[0..1].join(delimiter)}_#{Rubyc.version.split(delimiter)[0..1].join(delimiter)}"
       end
     end
   end
