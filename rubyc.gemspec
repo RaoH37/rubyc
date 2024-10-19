@@ -5,10 +5,11 @@ require_relative 'lib/rubyc'
 Gem::Specification.new do |spec|
   spec.name = 'rubyc'
   spec.version = Rubyc.version
+  spec.date = `date '+%Y-%m-%d'`
   spec.authors = ['Maxime Désécot']
   spec.email = ['maxime.desecot@gmail.com']
 
-  spec.summary = 'Tool to generate or load ruby bytecode'
+  spec.summary = 'Tool to generate or load byte-coded Ruby project'
   spec.homepage = 'https://github.com/RaoH37/rubyc'
   spec.required_ruby_version = '>= 3.0.0'
 
@@ -24,7 +25,7 @@ Gem::Specification.new do |spec|
         f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
     end
   end
-  spec.bindir = 'exe'
-  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ['lib']
+
+  spec.executables = ['rubyc']
+  spec.require_paths = ['lib', 'bin']
 end
