@@ -38,6 +38,21 @@ rubyc --generate /path/of/the/project
 rubyc --load /path/of/the/byte-coded/project
 ```
 
+## Load byte-coded project in your Ruby project
+
+```ruby
+require 'rubyc/core_ext'
+Rubyc.load '/path/of/the/byte-coded/project/file'
+```
+
+or
+
+```ruby
+require 'rubyc/core_ext'
+$LOAD_PATH.unshift('/path/of/the/byte-coded/project')
+Rubyc.load 'byte-coded-file'
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/RaoH37/rubyc.
