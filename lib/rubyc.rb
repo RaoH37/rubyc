@@ -16,6 +16,9 @@ module Rubyc
     def load(input_path, load_path: nil)
       require_relative 'rubyc/loader' unless defined?(Rubyc::Loader)
 
+      input_path = input_path.to_path if input_path.respond_to?(:to_path)
+      load_path = load_path.to_path if load_path.respond_to?(:to_path)
+
       logger.debug "load input_path=#{input_path} load_path=#{load_path}"
 
       load_path ||= File.dirname(input_path)
@@ -30,6 +33,10 @@ module Rubyc
 
     def generate(input_path, package_name: nil, record_dir_path: Dir.pwd)
       require_relative 'rubyc/builder' unless defined?(Rubyc::Builder)
+
+      input_path = input_path.to_path if input_path.respond_to?(:to_path)
+      record_dir_path = record_dir_path.to_path if record_dir_path.respond_to?(:to_path)
+
       Builder.call(input_path, package_name: package_name, record_dir_path: record_dir_path)
     end
 

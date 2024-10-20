@@ -1,0 +1,17 @@
+module Rubyc
+  class Builder
+    class FileBuilder
+      @node: NodeBuilder::Node
+
+      @node_relative_paths: Array[String]
+
+      @binary_path: String
+
+      def initialize: (NodeBuilder::Node node, String package_path, Array[String] node_relative_paths) -> void
+
+      def generate: () -> Integer
+
+      def to_bytes: () -> String
+    end
+  end
+end

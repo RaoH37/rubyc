@@ -1,0 +1,67 @@
+module Rubyc
+  class Builder
+    class NodeBuilder
+      @abs_path: String
+
+      @nodes: Array[Node]
+
+      REQUIRE_REGEX: ::Regexp
+
+      REQUIRE_METHOD_NAME: "require"
+
+      REQUIRE_RELATIVE_METHOD_NAME: "require_relative"
+
+      REQUIRE_PACK_METHOD_NAME: "require_pack"
+
+      attr_reader nodes: Array[Node]
+
+      attr_reader abs_path: String
+
+      def initialize: (Array[String] paths, String abs_path) -> void
+
+      def <<: (Node node) -> untyped
+
+      class Node
+        @builder: NodeBuilder
+
+        @parent: Node
+
+        @path: String
+
+        @dir_path: String
+
+        @relative_binary_path: String
+
+        @relative_path: String
+
+        @converted_content: String
+
+        include Comparable
+
+        attr_reader path: String
+
+        attr_reader builder: NodeBuilder
+
+        attr_reader converted_content: String
+
+        def initialize: (NodeBuilder builder, (Node|NilClass) parent, String path) -> void
+
+        def relative_binary_path: () -> String
+
+        def binary_name: () -> String
+
+        def relative_path: () -> String
+
+        def <=>: (Node other) -> Integer
+
+        def build: () -> void
+
+        def extract_require_match: (String r_type, String r_path) -> String
+
+        def require_full_path: (String r_type, String r_path_with_extension) -> String
+
+        def to_s: () -> ::String
+      end
+    end
+  end
+end

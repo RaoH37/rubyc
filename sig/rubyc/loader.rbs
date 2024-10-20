@@ -1,0 +1,11 @@
+module Rubyc
+  class Loader
+    @input_path: String
+
+    def self.call: (String input_path) -> void
+
+    def initialize: (String input_path) -> void
+
+    def load: () -> void
+  end
+end

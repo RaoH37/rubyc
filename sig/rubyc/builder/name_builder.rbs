@@ -1,0 +1,23 @@
+module Rubyc
+  class Builder
+    class NameBuilder
+      @package_name: String
+
+      @record_dir_path: String
+
+      def self.call: (String package_name, String record_dir_path) -> String
+
+      def initialize: (String package_name, String record_dir_path) -> void
+
+      def generate: () -> String
+
+      private
+
+      def dist_path: () -> ::String
+
+      def package_full_name: () -> ::String
+
+      def suffix: () -> ::String
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module Rubyc
+  class Builder
+    @package_path: String
+
+    @node_builder: Rubyc::Builder::NodeBuilder
+
+    def self.call: (String input_path, **Hash[Symbol, (String|NilClass)] options) -> String
+
+    def initialize: (String input_path, ?package_name: String?, ?record_dir_path: String?) -> void
+
+    def generate: () -> String
+
+    private
+
+    def node_builder_settings: (String input_path) -> ::Array[String]
+  end
+end

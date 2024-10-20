@@ -1,0 +1,13 @@
+module Rubyc
+  class Builder
+    class FilesBuilder
+      @nodes: Array[NodeBuilder::Node]
+
+      @package_path: String
+
+      def initialize: (Array[NodeBuilder::Node] nodes, String package_path) -> void
+
+      def generate: () -> void
+    end
+  end
+end

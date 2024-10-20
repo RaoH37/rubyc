@@ -1,12 +1,20 @@
-# See the writing guide of rbs: https://github.com/ruby/rbs#guides
-
 module Rubyc
-  RUBYC_EXTENSION: String
-  RUBY_EXTENSION: String
+  self.@logger: Logger
 
-  def self.version: -> String
+  RUBY_EXTENSION: ".rb"
 
-  def self.suffixes: -> Array[String]
+  RUBYC_EXTENSION: ".rbc"
 
-  def self.load: (String|Pathname, load_path: (NilClass|String|Pathname)) -> bool
+  class Error < StandardError
+  end
+
+  def self.version: () -> String
+
+  def self.suffixes: () -> ::Array[".rbc"]
+
+  def self.load: ((String|Pathname) input_path, ?load_path: (String|Pathname)?) -> bool
+
+  def self.generate: ((String|Pathname) input_path, ?package_name: String?, ?record_dir_path: (String|Pathname)) -> String
+
+  def self.logger: () -> Logger
 end
