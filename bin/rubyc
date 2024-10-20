@@ -10,7 +10,8 @@ require 'optionparser'
 options = {
   byte_file_path: nil,
   file_or_dir_path: nil,
-  record_dir_path: nil
+  record_dir_path: nil,
+  package_name: nil
 }
 
 parser = OptionParser.new do |opts|
@@ -28,6 +29,10 @@ parser = OptionParser.new do |opts|
     options[:record_dir_path] = file_or_dir_output_path
   end
 
+  opts.on('--package-name NAME', String, 'package name') do |name|
+    options[:package_name] = name
+  end
+
   opts.on('--debug', 'active debug mode') do
     Rubyc.logger.level = Logger::DEBUG
   end
@@ -40,7 +45,7 @@ begin
   if options[:byte_file_path]
     Rubyc.load(options[:byte_file_path])
   elsif options[:file_or_dir_path]
-    puts Rubyc.generate(options[:file_or_dir_path], record_dir_path: options[:record_dir_path])
+    puts Rubyc.generate(options[:file_or_dir_path], package_name: options[:package_name], record_dir_path: options[:record_dir_path])
   end
 rescue StandardError => e
   puts e.message
