@@ -1,4 +1,12 @@
+# See the writing guide of rbs: https://github.com/ruby/rbs#guides
+
 module Rubyc
-  VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+  RUBYC_EXTENSION: String
+  RUBY_EXTENSION: String
+
+  def self.version: -> String
+
+  def self.suffixes: -> Array[String]
+
+  def self.load: (String|Pathname, load_path: (NilClass|String|Pathname)) -> bool
 end

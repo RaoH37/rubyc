@@ -6,7 +6,7 @@ module Kernel
   end
 
   def require_pack(path)
-    puts "require_pack=#{path}"
+    Rubyc.logger.debug "require_pack=#{path}"
     path = path.to_path if path.respond_to? :to_path
 
     pack_paths = pack_paths_with_extensions(path)
@@ -34,8 +34,6 @@ module Kernel
 
   def load_pack(path)
     return if loaded_packs.include?(path)
-
-    puts "load_pack=#{path}"
 
     Rubyc.load(path)
     loaded_packs << path

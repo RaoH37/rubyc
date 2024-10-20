@@ -27,6 +27,10 @@ parser = OptionParser.new do |opts|
   opts.on('--record-path PATH', String, 'directory to record compiled file') do |file_or_dir_output_path|
     options[:record_dir_path] = file_or_dir_output_path
   end
+
+  opts.on('--debug', 'active debug mode') do
+    Rubyc.logger.level = Logger::DEBUG
+  end
 end
 parser.parse!
 

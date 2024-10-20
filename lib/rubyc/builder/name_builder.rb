@@ -20,6 +20,7 @@ module Rubyc
         dist_path.tap do |path|
           FileUtils.rm_rf path if File.exist? path
           FileUtils.mkdir_p path
+          Rubyc.logger.debug "create dist folder=#{path}"
         end
       end
 

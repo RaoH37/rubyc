@@ -11,6 +11,7 @@ module Rubyc
 
       def generate
         FileUtils.mkdir_p File.dirname(@binary_path)
+        Rubyc.logger.debug "create binary file=#{@binary_path}"
         File.binwrite @binary_path, to_bytes
       end
 
