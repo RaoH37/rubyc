@@ -3,6 +3,7 @@
 require_relative 'builder/files_builder'
 require_relative 'builder/name_builder'
 require_relative 'builder/node_builder'
+require_relative 'package_info'
 
 module Rubyc
   class Builder
@@ -23,6 +24,7 @@ module Rubyc
 
     def generate
       FilesBuilder.new(@node_builder.nodes, @package_path).generate
+      PackageInfo.build(@package_path)
       @package_path
     end
 

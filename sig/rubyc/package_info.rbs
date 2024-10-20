@@ -1,0 +1,17 @@
+module Rubyc
+  class PackageInfo
+    def self.build: (String package_path) -> void
+
+    class Builder
+      @package_path: String
+
+      DIGEST: "SHA256"
+
+      def initialize: (String package_path) -> void
+
+      def generate: () -> void
+
+      def package_sum: () -> String
+    end
+  end
+end
