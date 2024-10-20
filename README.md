@@ -19,11 +19,12 @@ If bundler is not being used to manage dependencies, install the gem by executin
 After installation, Rubyc provides a `rubyc` executable to generate or run a byte-coded Ruby project.
 
 ```bash
-rubyc -h
 Usage: rubyc v1.0.0 [options]
         --load PATH                  byte file to load
         --generate PATH              file or directory to compile
         --record-path PATH           directory to record compiled file
+        --package-name NAME          package name
+        --debug                      active debug mode
 ```
 
 ### Generate a byte-coded version of a Ruby project
