@@ -24,7 +24,7 @@ module Rubyc
       end
 
       def package_sum
-        bytes = Dir[File.join(@package_path, '**/*.rb')].sort.map do |path|
+        bytes = Dir[File.join(@package_path, '**/*.rbc')].sort.map do |path|
           File.read(path)
         end
 
